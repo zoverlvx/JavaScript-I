@@ -63,7 +63,7 @@ let inventory = [{"id":1,"car_make":"Lincoln","car_model":"Navigator","car_year"
 
 // ==== Challenge 1 ====
 // The dealer can't recall the information for a car with an id of 33 on his lot. Help the dealer find out which car has an id of 33 by logging the car's year, make, and model in the console log provided to you below:
-function findCarById(id) {
+/*function findCarById(id) {
     if (typeof(id) === "number") {
         const found = inventory.filter(obj => obj.id === id);
     if (typeof(found) === "object") {
@@ -76,7 +76,14 @@ function findCarById(id) {
     }
     console.log("Id must be a numerical value.")
 }
-findCarById(33);
+findCarById(33);*/
+
+const len = inventory.length;
+for (let i = 0; i < len; i+=1) {
+    if (inventory[i].id === 33) {
+        console.log(inventory[i]);
+    }
+}
 
 // ==== Challenge 2 ====
 // The dealer needs the information on the last car in their inventory.  What is the make and model of the last car in the inventory?  Log the make and model into the console.
@@ -85,6 +92,15 @@ console.log(inventory[lastCar].car_make, inventory[lastCar].car_model);
 
 // ==== Challenge 3 ====
 // The marketing team wants the car models listed alphabetically on the website. Sort all the car model names into alphabetical order and log the results in the console
+const modelArray = [];
+for (let i = 0; i < len-1; i+=1) {
+    const carModel = inventory[i].car_model;
+    modelArray.push(carModel);
+}
+console.log(modelArray.sort());
+
+
+/*
 function findAllBySubjectSortedAscended(inventory, subject) {
     const newArray = inventory;
     newArray.sort(function(a, b) {
@@ -96,19 +112,34 @@ function findAllBySubjectSortedAscended(inventory, subject) {
 }
 
 console.log(findAllBySubjectSortedAscended(inventory, "car_model"));
+*/
 
 // ==== Challenge 4 ====
 // The accounting team needs all the years from every car on the lot. Create a new array from the dealer data containing only the car years and log the result in the console.
-console.log(findAllBySubjectSortedAscended(inventory, "car_year"));
+//console.log(findAllBySubjectSortedAscended(inventory, "car_year"));
+const yearsArray = [];
+for (let i = 0; i < len; i += 1) {
+    yearsArray.push(inventory[i].car_year);
+}
+console.log(yearsArray.sort(function(a, b) {
+    return a-b;
+}));
 
 // ==== Challenge 5 ====
 // The car lot manager needs to find out how many cars are older than the year 2000. Using the carYears array you just created, find out how many cars were made before the year 2000 by populating the array oldCars and logging it's length.
-let oldCars = findAllBySubjectSortedAscended(inventory, "car_year");
-console.log(oldCars.filter(a => a < 2000)); 
+//let oldCars = findAllBySubjectSortedAscended(inventory, "car_year");
+//console.log(oldCars.filter(a => a < 2000));
+const oldCars = [];
+for (let i = 0; i < len; i += 1) {
+    if (yearsArray[i] < 2000) {
+        oldCars.push(yearsArray[i]);
+    }
+}
+console.log(oldCars);
 
 // ==== Challenge 6 ====
 // A buyer is interested in seeing only BMW and Audi cars within the inventory.  Return an array that only contains BMW and Audi cars.  Once you have populated the BMWAndAudi array, use JSON.stringify() to show the results of the array in the console.
-function findCarsByMake(inventory, makeArray) {
+/*function findCarsByMake(inventory, makeArray) {
     const newArray = [];
     const newInventoryArray = inventory;
     makeArray.forEach(function(carMake) {
@@ -121,6 +152,14 @@ function findCarsByMake(inventory, makeArray) {
     return newArray;
 }
 console.log(findCarsByMake(inventory, ["BMW", "Audi"]));
-
-
-
+*/
+const makeArray = [];
+for (let i = 0; i < len; i += 1) {
+    if (inventory[i].car_make === "BMW") {
+        makeArray.push(inventory[i]);
+    }    
+    if (inventory[i].car_make === "Audi") {
+        makeArray.push(inventory[i])
+    }
+}
+console.log(makeArray);
